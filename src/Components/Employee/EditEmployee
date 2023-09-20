@@ -1,0 +1,51 @@
+import axios from 'axios'
+import React from 'react'
+import { useState} from 'react'
+
+export default function EditEmployee() {
+  
+  const[empFname,setempFname]=useState('')
+  const[empLname,setempLname]=useState('')
+  const[empMobile,setempMobile]=useState('')
+  const[empAddr,setempAddr]=useState('')
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+          empFname:empFname,
+      empLname:empLname,
+      empMobile:empMobile,
+      empAddr:empAddr 
+        }
+        console.log(data)
+        axios.put(`http://127.0.0.1:8100/updatebusbyid/${empId}`,data)
+          .then(response => { console.log(response.data) })
+          .catch(err => { console.log(err) })
+         
+        alert("updated")
+      }    
+  return (
+    <div className='signin'>
+    <h1>FILL THE DETAILS</h1>
+    <form onSubmit={handleSubmit}>
+    <label>First NAME:    <input type='text' id='name' placeholder='ENTER YOUR NAME'  onChange={(e)=>setempFname(e.target.value)}>
+    </input>
+    </label>
+    <br></br>
+    <label>LastNAME:    <input type='text' id='name' placeholder='ENTER YOUR NAME'  onChange={(e)=>setempLname(e.target.value)}>
+    </input>
+    </label>
+    <br></br>
+    <label>Mobile:    <input type='text'   onChange={(e)=>setempMobile(e.target.value)}>
+    </input>
+    </label>
+    <br></br>
+    <label>Address:    <input type='number'  placeholder='ENTER YOUR AGE' onChange={(e)=>setempAddr(e.target.value)}>
+    </input></label>
+    <br></br>
+    
+    <br></br>
+    <input type='submit'></input>
+    </form>
+    </div>
+  )
+}
